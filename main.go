@@ -1,0 +1,5 @@
+package mongoGolang
+
+func main() {
+
+}
