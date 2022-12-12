@@ -1,11 +1,11 @@
 package main
 
 type Cluster struct {
-	name      string    `json:"name"`
-	resources Resources `json:"resources"`
+	Name      string    `json:"name"`
+	Resources Resources `json:"resources"`
 }
 
 type Resources struct {
-	cpu    int `json:"cpu"`
-	memory int `json:"memory"`
+	Cpu    int `json:"cpu"`
+	Memory int `json:"memory"`
 }
