@@ -1,4 +1,4 @@
-package main
+package structure
 
 type Cluster struct {
 	Name      string    `json:"name,omitempty" bson:"name,omitempty"`

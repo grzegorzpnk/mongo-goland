@@ -1,22 +1,32 @@
-package main
+package api
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 	"log"
+	"mongoGolang/src/pkg/structure"
 	"net/http"
 	"time"
 )
 
-func CreateClusterHandler(response http.ResponseWriter, request *http.Request) {
+type apiHandler struct {
+	clientMongo *mongo.Client
+}
+
+func (h *apiHandler) setClient(client *mongo.Client) {
+	h.clientMongo = client
+}
+
+func (h *apiHandler) CreateClusterHandler(response http.ResponseWriter, request *http.Request) {
 	fmt.Println("New request")
 	response.Header().Add("content-type", "application/json")
-	var cluster Cluster
+	var cluster structure.Cluster
 	json.NewDecoder(request.Body).Decode(&cluster)
 	fmt.Println(cluster)
-	collection := client.Database("topology").Collection("clusters")
+	collection := h.clientMongo.Database("topology").Collection("clusters")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	result, err := collection.InsertOne(ctx, cluster)
 	if err != nil {
@@ -26,13 +36,13 @@ func CreateClusterHandler(response http.ResponseWriter, request *http.Request) {
 
 }
 
-func GetClustersHandler(response http.ResponseWriter, request *http.Request) {
+func (h *apiHandler) GetClustersHandler(response http.ResponseWriter, request *http.Request) {
 	fmt.Println("GET Clusters method")
 	response.Header().Add("content-type", "application/json")
 
-	var cluster []Cluster
+	var cluster []structure.Cluster
 
-	collection := client.Database("topology").Collection("clusters")
+	collection := h.clientMongo.Database("topology").Collection("clusters")
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	cursor, err := collection.Find(ctx, bson.M{})
 	if err != nil {
@@ -42,7 +52,7 @@ func GetClustersHandler(response http.ResponseWriter, request *http.Request) {
 	}
 
 	for cursor.Next(ctx) {
-		var cluster_tmp Cluster
+		var cluster_tmp structure.Cluster
 		cursor.Decode(&cluster_tmp)
 		cluster = append(cluster, cluster_tmp)
 	}
