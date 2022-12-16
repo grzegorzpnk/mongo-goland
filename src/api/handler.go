@@ -40,7 +40,6 @@ func (h *apiHandler) CreateClusterHandler(response http.ResponseWriter, request 
 	if err != nil {
 		fmt.Println(fmt.Errorf("error: " + err.Error()))
 	}
-
 }
 
 func (h *apiHandler) GetClustersHandler(response http.ResponseWriter, _ *http.Request) {

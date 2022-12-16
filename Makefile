@@ -2,6 +2,7 @@
 
 all: clean compile build
 
+#before building pls make sure that you are logged into Docker account ( in order to avoid too mamy requests error)
 build:
 	@echo "Building mongoclient app"
 	sudo docker build --rm -f ./build/docker/Dockerfile -t mongoclient .

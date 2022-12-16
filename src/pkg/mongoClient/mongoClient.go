@@ -7,10 +7,10 @@ import (
 	"time"
 )
 
-func ConnectToMongo() *mongo.Client {
+func ConnectToMongo(ip, port string) *mongo.Client {
 
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	clientOptions := options.Client().ApplyURI("mongodb://10.254.185.109:27017")
+	clientOptions := options.Client().ApplyURI(ip + port)
 	client, _ := mongo.Connect(ctx, clientOptions)
 
 	return client

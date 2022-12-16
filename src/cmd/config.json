@@ -1,0 +1,5 @@
+{
+  "mongo-endpoint": "mongodb://10.254.185.109",
+  "mongo-port": ":27017",
+  "client-port": ":12345"
+}
