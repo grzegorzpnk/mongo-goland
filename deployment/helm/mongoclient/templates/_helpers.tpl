@@ -33,7 +33,7 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "nmt.labels" -}}
+{{- define "mongoclient.labels" -}}
 helm.sh/chart: {{ include "mongoclient.chart" . }}
 {{ include "mongoclient.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
@@ -46,7 +46,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "mongoclient.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "nmt.name" . }}
+app.kubernetes.io/name: {{ include "mongoclient.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
