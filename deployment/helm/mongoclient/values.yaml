@@ -1,0 +1,31 @@
+replicaCount: 1
+
+image:
+  repository: grzegorzpnk/mongoclient
+  pullPolicy: Always
+  tag: "latest"
+
+workingDir: "/mongoclient"
+command: "./mongoclient"
+config:
+  "mongoEndpoint": "mongodb://10.254.185.109",
+  "mongoPort": ":27017",
+  "clientPort": ":12345"
+
+
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+
+service:
+  type: NodePort
+  port: 12345
+  nodePort: 32139
+
+resources: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
