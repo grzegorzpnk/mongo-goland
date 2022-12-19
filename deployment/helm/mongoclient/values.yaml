@@ -8,8 +8,8 @@ image:
 workingDir: "/mongoclient"
 command: "./mongoclient"
 config:
-  "mongoEndpoint": "mongodb://10.254.185.109",
-  "mongoPort": ":27017",
+  "mongoEndpoint": "mongodb://10.254.185.109"
+  "mongoPort": ":27017"
   "clientPort": ":12345"
 
 
